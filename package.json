@@ -1,0 +1,92 @@
+{
+  "name": "@referralpanda/react-native",
+  "version": "0.1.0-beta.0",
+  "description": "ReferralPanda SDK for React Native and Expo: referral codes, share links, attribution and rewards.",
+  "license": "MIT",
+  "homepage": "https://referralpanda.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/referral-panda/referralpanda-react-native.git"
+  },
+  "type": "module",
+  "sideEffects": [
+    "./dist/integrations/*"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./ui": {
+      "types": "./dist/ui/index.d.ts",
+      "default": "./dist/ui/index.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "default": "./dist/core/index.js"
+    },
+    "./lottie": {
+      "types": "./dist/integrations/lottie.d.ts",
+      "default": "./dist/integrations/lottie.js"
+    },
+    "./expo-clipboard": {
+      "types": "./dist/integrations/expo-clipboard.d.ts",
+      "default": "./dist/integrations/expo-clipboard.js"
+    },
+    "./app.plugin.js": "./app.plugin.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "ios",
+    "android",
+    "expo-module.config.json",
+    "app.plugin.js",
+    "README.md",
+    "LICENSE",
+    "!android/build",
+    "!android/.gradle"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "peerDependencies": {
+    "@react-native-async-storage/async-storage": ">=2.0.0",
+    "expo": ">=53.0.0",
+    "expo-clipboard": "*",
+    "lottie-react-native": ">=7.0.0",
+    "react": ">=19.0.0",
+    "react-native": ">=0.79.0",
+    "react-native-svg": ">=15.0.0"
+  },
+  "peerDependenciesMeta": {
+    "expo-clipboard": {
+      "optional": true
+    },
+    "lottie-react-native": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.3.0",
+    "expo-clipboard": "~58.0.4",
+    "expo-font": "~58.0.12",
+    "expo-modules-core": "~58.1.0",
+    "lottie-react-native": "7.5.1",
+    "react": "^19.3.1",
+    "react-native": "0.88.1",
+    "react-native-svg": "15.16.1",
+    "typescript": "~6.0.3"
+  },
+  "bugs": {
+    "url": "https://github.com/referral-panda/referralpanda-react-native/issues"
+  }
+}

@@ -1,0 +1,45 @@
+name: Publish
+
+# Publishes @referralpanda/react-native to npm when a version tag is pushed. The tag is
+# pushed by the release job of the private repository this code is developed in.
+#
+# No npm token is stored anywhere: npm trusts this workflow in this repository directly
+# (npm "trusted publisher"), and the package is published with provenance.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: The tag must match the package version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "$TAG" != "v$version" ]; then
+            echo "Tag $TAG does not match package version $version" >&2
+            exit 1
+          fi
+      - run: npm install
+      - run: npm run build
+      - name: Publish (prereleases go to the beta tag, never to latest)
+        run: |
+          npm install -g npm@latest
+          version=$(node -p "require('./package.json').version")
+          case "$version" in
+            *-*) npm publish --access public --tag beta ;;
+            *) npm publish --access public ;;
+          esac
